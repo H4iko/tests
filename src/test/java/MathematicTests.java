@@ -8,13 +8,6 @@ import java.util.stream.Stream;
 
 public class MathematicTests {
 
-    Mathematic sut;
-
-    @BeforeEach
-    public void init() {
-        sut = new Mathematic();
-    }
-
     @BeforeAll
     public static void start() {
         System.out.println("Start tests");
@@ -28,26 +21,27 @@ public class MathematicTests {
     @ParameterizedTest
     @MethodSource("source")
     public void testCircLength(double r, double expected) {
-
+        Mathematic mathematic = new Mathematic();
         // when:
-        double result = sut.circLength(r);
+        double result = mathematic.circLength(r);
 
         // then:
         Assertions.assertEquals(expected, result);
     }
 
-        private static Stream<Arguments> source() {
+    private static Stream<Arguments> source() {
         return Stream.of(Arguments.of(1, 6), Arguments.of(3, 19));
     }
 
     @Test
     public void testDiff() {
+        Mathematic mathematic = new Mathematic();
         // given:
         int r = 5;
         boolean expected = false;
 
         // when:
-        boolean result = sut.diff(r);
+        boolean result = mathematic.diff(r);
 
         // then:
         Assertions.assertEquals(expected, result);
@@ -55,13 +49,14 @@ public class MathematicTests {
 
     @org.junit.jupiter.api.Test
     public void testFile() {
+        Mathematic mathematic = new Mathematic();
         // given:
         int r = 5;
         double square = 32d;
         var expected = IOException.class;
 
         // then:
-        Assertions.assertThrows(expected, () -> sut.file(r, square));
+        Assertions.assertThrows(expected, () -> mathematic.file(r, square));
     }
 
 }
